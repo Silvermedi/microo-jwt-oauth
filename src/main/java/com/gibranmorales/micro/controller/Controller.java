@@ -1,7 +1,9 @@
 package com.gibranmorales.micro.controller;
 
+import com.gibranmorales.micro.dto.Credentials;
 import com.gibranmorales.micro.model.GenericResponse;
 import com.gibranmorales.micro.model.Token;
+import com.gibranmorales.micro.service.IServiceProces;
 import com.gibranmorales.micro.utils.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +23,19 @@ public class Controller {
 
     @Autowired
     private JwtUtil jwtUtil = new JwtUtil();
+    @Autowired
+    private IServiceProces iService;
 
     @PostMapping(value = "/autentificacion", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GenericResponse<Token>> createToken(@RequestHeader String username) {
+    public GenericResponse<Credentials> getCredentials(@RequestHeader String username) {
+        logger.info("Inicio - Controller - getCredentials");
+        return iService.getCredentials(username);
+    }
+
+    @PostMapping(value = "/TokenExpires", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GenericResponse<Token>> TokenExpires(@RequestHeader String username) {
         logger.info("Entré al controlador /jwtfilter/autentificacion");
         GenericResponse<Token> response = new GenericResponse<>();
         response = jwtUtil.generateToken(username);

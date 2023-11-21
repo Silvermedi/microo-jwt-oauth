@@ -1,6 +1,8 @@
 package com.gibranmorales.micro.model;
 
-public class ErrorResponse {
+import java.io.Serializable;
+
+public class ErrorResponse implements Serializable {
     private int codigo;
     private String mensaje;
 

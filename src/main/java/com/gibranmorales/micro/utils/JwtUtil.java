@@ -28,22 +28,23 @@ public class JwtUtil {
                 .setExpiration(new Date(now + 900000)) // Token válido por 15 minutos
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact());
+        token.setMsj("Token que expira en 15 minutos");
         logger.info("Token que expira en 15 mns : {}",token.getToken());
         response.setResultado(token);
         return response;
     }
 
     public GenericResponse<Token> generateTokenForTesting(String username) {
+        logger.info("Entrando generateTokenForTesting");
         GenericResponse<Token> response = new GenericResponse<>();
         Token token = new Token();
-        logger.info("Generando token de prueba que no expira");
         long now = System.currentTimeMillis();
-
         token.setToken(Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(now))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact());
+        token.setMsj("Token para testing");
         logger.info("Token generado: {}",token.getToken());
         response.setResultado(token);
         return response;
