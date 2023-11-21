@@ -25,7 +25,7 @@ Instrucciones paso a paso para clonar el repositorio, instalar dependencias y co
 
 2. **Obtener Token**
    - **URL**: `localhost:8081/GetToken`
-   - **Método**: GET
+   - **Método**: POST
    - **Descripción**: Genera un token JWT para acceder a endpoints protegidos.
    - **Respuesta de Ejemplo**:
      ```json
@@ -39,7 +39,7 @@ Instrucciones paso a paso para clonar el repositorio, instalar dependencias y co
 
 3. **Autenticación con JWT**
    - **URL**: `localhost:8081/jwtfilter/autentificacion`
-   - **Método**: GET
+   - **Método**: POST
    - **Descripción**: Autentica utilizando el token JWT obtenido.
    - **Requiere**: Bearer Token
    - **Respuesta de Ejemplo**:
