@@ -5,6 +5,7 @@ import com.gibranmorales.micro.model.GenericResponse;
 import com.gibranmorales.micro.utils.Constants;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -46,6 +47,20 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCodigo(Constants.ERROR500);
         errorResponse.setMensaje("Error interno del servidor: " + exception.getMessage());
+
+        GenericResponse<ErrorResponse> genericResponse = new GenericResponse<>();
+        genericResponse.setResultado(errorResponse);
+        genericResponse.setOperacion(Constants.FAILOPERATION);
+
+        return new ResponseEntity<>(genericResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<GenericResponse<ErrorResponse>> handleDataAccessException(DataAccessException exception, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCodigo(Constants.ERROR500);
+        errorResponse.setMensaje("Error al acceder a la base de datos: " + exception.getMessage());
 
         GenericResponse<ErrorResponse> genericResponse = new GenericResponse<>();
         genericResponse.setResultado(errorResponse);
