@@ -7,8 +7,8 @@ Este microservicio, implementado en Java Spring Boot y compatible con Java 17, p
 ## Requisitos Previos
 
 - Java 17
-- Spring Boot (especificar versión)
-- Cualquier otra dependencia específica del proyecto
+- Spring Boot 2.7.17
+- Dependencias en el POM.XML
 
 ## Instalación y Configuración
 
