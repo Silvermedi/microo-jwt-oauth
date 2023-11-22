@@ -22,6 +22,14 @@ Instrucciones paso a paso para clonar el repositorio, instalar dependencias y co
    - **URL**: `localhost:8081/jwtfilter/health`
    - **Método**: GET
    - **Descripción**: Verifica la salud del microservicio.
+   - ```json
+     {
+         {
+             "operacion": "Operacion Exitosa",
+             "resultado": null
+         }
+     }
+     ```
 
 2. **Obtener Token**
    - **URL**: `localhost:8081/GetToken`
@@ -30,11 +38,12 @@ Instrucciones paso a paso para clonar el repositorio, instalar dependencias y co
    - **Respuesta de Ejemplo**:
      ```json
      {
-         "operacion": "Operacion Exitosa",
-         "resultado": {
-             "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHaWJyYW4iLCJpYXQiOjE3MDA1OTk1NzZ9.6iSpha1OIxdW1sAPEdoLgwtx0FMTYR-oVQuqvB5mGTj315rYqNm1M2l-ys9ZRAh4Bo9mY03RtOkSwfhEk_6VyA"
-         }
-     }
+          "operacion": "Operacion Exitosa",
+          "resultado": {
+              "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHaWJyYW4iLCJpYXQiOjE3MDA2MDYzMTZ9.gqTvgSjdmfxFJei6yx87ezO74G2vggoKgnROlB_7ojzcdKkho6Mso0vO1wiNUaj5i-0k4sp2LsN5lD0StIjonw",
+              "msj": "Token para testing"
+          }
+      }
      ```
 
 3. **Autenticación con JWT**
@@ -45,9 +54,26 @@ Instrucciones paso a paso para clonar el repositorio, instalar dependencias y co
    - **Respuesta de Ejemplo**:
      ```json
      {
-         "operacion": "Operacion Exitosa",
-         "resultado": {
-             "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaWJyYW4yIiwiaWF0IjoxNzAwNTk5NTk5LCJleHAiOjE3MDA2MDA0OTl9.eofBXJe5TrLXe2NdgpDlvYglTKKhES5JaSBD3CCeawjqdOu8KfMZOEf6gGQ9tfBbeaey07gpamZlz4IbiQ7rAQ"
-         }
-     }
+          "operacion": "Operacion Exitosa",
+          "resultado": {
+              "username": "usuario1",
+              "password": "clave1"
+          }
+      }
+     ```
+
+    4. **TokenExpires con JWT**
+   - **URL**: `localhost:8081/jwtfilter/TokenExpires`
+   - **Método**: POST
+   - **Descripción**: Obtener nuevos token que expiren
+   - **Requiere**: Bearer Token
+   - **Respuesta de Ejemplo**:
+     ```json
+       {
+          "operacion": "Operacion Exitosa",
+          "resultado": {
+              "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnaWJyYW4yIiwiaWF0IjoxNzAwNjA2MzI0LCJleHAiOjE3MDA2MDcyMjR9.YzR9aHvg8WA1bKhZtYuJ5vctvMtF1FFXp6IzhO476w0w_I_8mlLJeszc9PrDaZX1IYSKZiuPMji7NBdA6z40Iw",
+              "msj": "Token que expira en 15 minutos"
+          }
+      }
      ```
